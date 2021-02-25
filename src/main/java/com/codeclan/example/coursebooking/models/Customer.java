@@ -27,6 +27,8 @@ public class Customer {
     @JsonIgnoreProperties({"customer"})
     private List<Booking> bookings;
 
+
+
     public Customer(String name, String town, int age) {
         this.name = name;
         this.town = town;
