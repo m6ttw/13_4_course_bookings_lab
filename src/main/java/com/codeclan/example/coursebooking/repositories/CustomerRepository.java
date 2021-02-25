@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     List<Customer> findByBookingsCourseId(Long id);
 
-    List<Customer> findByTownAndBookingsCourseId(String town, Long id);
+    List<Customer> findByTownAndBookingsCourseIdAllIgnoreCase(String town, Long id);
 
-    List<Customer> findByTownAndBookingsCourseIdAndAgeGreaterThan(String town, Long id, int age);
+    List<Customer> findByTownAndBookingsCourseIdAndAgeGreaterThanAllIgnoreCase(String town, Long id, int age);
 }
