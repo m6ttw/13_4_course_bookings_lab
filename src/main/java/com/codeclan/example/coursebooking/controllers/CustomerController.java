@@ -1,6 +1,5 @@
 package com.codeclan.example.coursebooking.controllers;
 
-import com.codeclan.example.coursebooking.models.Course;
 import com.codeclan.example.coursebooking.models.Customer;
 import com.codeclan.example.coursebooking.repositories.CourseRepository;
 import com.codeclan.example.coursebooking.repositories.CustomerRepository;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class CustomerController {
@@ -30,12 +28,12 @@ public class CustomerController {
             @RequestParam(name = "age", required = false) Integer age
 
     ){ if (courseName != null && town != null && age != null){
-        return new ResponseEntity<>(customerRepository.findByTownAndBookingsCourseNameAndAgeGreaterThan(town, courseName, age), HttpStatus.OK);
+        return new ResponseEntity<>(customerRepository.findByTownAndBookingsCourseNameAndAgeGreaterThanIgnoreCase(town, courseName, age), HttpStatus.OK);
     } if(courseName != null && town != null){
-        return new ResponseEntity<>(customerRepository.findByTownAndBookingsCourseName(town, courseName), HttpStatus.OK);
+        return new ResponseEntity<>(customerRepository.findByTownAndBookingsCourseNameIgnoreCase(town, courseName), HttpStatus.OK);
     }
         if(courseName != null){
-        return new ResponseEntity<>(customerRepository.findByBookingsCourseName(courseName), HttpStatus.OK);
+        return new ResponseEntity<>(customerRepository.findByBookingsCourseNameIgnoreCase(courseName), HttpStatus.OK);
     }
         return new ResponseEntity<>(customerRepository.findAll(), HttpStatus.OK);
     }
