@@ -24,4 +24,6 @@ public class CoursebookingApplicationTests {
 		Customer customer = new Customer("Bob", "Edinburgh", 30);
 		customerRepository.save(customer);
 	}
+
+
 }
