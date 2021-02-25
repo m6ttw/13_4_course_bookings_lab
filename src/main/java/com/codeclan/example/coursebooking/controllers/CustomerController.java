@@ -25,9 +25,13 @@ public class CustomerController {
     public ResponseEntity<List<Customer>> getAllCustomers(
             @RequestParam(name = "course", required = false) Long id,
             @RequestParam(name = "town", required = false) String town,
-            @RequestParam(name = "age", required = false) Integer age
+            @RequestParam(name = "age", required = false) Integer age,
+            @RequestParam(name = "rating", required = false) Integer rating
 
-    ){ if (id != null && town != null && age != null){
+    ){ if (id != null && town != null && age != null && rating != null){
+        return new ResponseEntity<>(customerRepository.findByTownAndBookingsCourseIdAndAgeGreaterThanAndBookingsCourseRatingGreaterThanEqualAllIgnoreCase(town, id, age, rating), HttpStatus.OK);
+    }
+        if (id != null && town != null && age != null){
         return new ResponseEntity<>(customerRepository.findByTownAndBookingsCourseIdAndAgeGreaterThanAllIgnoreCase(town, id, age), HttpStatus.OK);
     } if(id != null && town != null){
         return new ResponseEntity<>(customerRepository.findByTownAndBookingsCourseIdAllIgnoreCase(town, id), HttpStatus.OK);
