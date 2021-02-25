@@ -26,8 +26,12 @@ public class CustomerController {
     @GetMapping(value = "/customers")
     public ResponseEntity<List<Customer>> getAllCustomers(
             @RequestParam(name = "course", required = false) String courseName,
-            @RequestParam(name = "town", required = false) String town
-    ){ if(courseName != null && town != null){
+            @RequestParam(name = "town", required = false) String town,
+            @RequestParam(name = "age", required = false) Integer age
+
+    ){ if (courseName != null && town != null && age != null){
+        return new ResponseEntity<>(customerRepository.findByTownAndBookingsCourseNameAndAgeGreaterThan(town, courseName, age), HttpStatus.OK);
+    } if(courseName != null && town != null){
         return new ResponseEntity<>(customerRepository.findByTownAndBookingsCourseName(town, courseName), HttpStatus.OK);
     }
         if(courseName != null){
